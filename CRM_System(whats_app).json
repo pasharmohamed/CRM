@@ -1,0 +1,823 @@
+{
+  "name": "CRM_System(whats_app)",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://cst-evolution-api-406cbd8f-8ccb1fdb.usecloudstation.com/message/sendText/crm_sytem",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "690070226f354734"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Webhook').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"عفواً! نحن شركة TechNova للإلكترونيات والأجهزة الذكية 💻📱.\\n\\nيبدو أن استفسارك خارج نطاق المنتجات والخدمات التي نقدمها. هل هناك أي شيء يخص الأجهزة التقنية يمكننا مساعدتك به؟ 🤖\"\n}",
+        "options": {}
+      },
+      "id": "489dabb5-1d82-441c-971e-0bed63b1262d",
+      "name": "Auto-Reply Out of Scope",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        672,
+        864
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://cst-evolution-api-406cbd8f-8ccb1fdb.usecloudstation.com/message/sendText/crm_sytem",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "690070226f354734"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Webhook').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"أنت الآن تتحدث مع الذكاء الاصطناعي 🤖\\nبرجاء إرسال الشكوى أو الطلب بالتفصيل في رسالة واحدة، وسيتم تحويلها فوراً للقسم المختص للتواصل معك في أقرب وقت.\"\n}",
+        "options": {}
+      },
+      "id": "053ad2bb-10a1-4eed-8d7b-c6228987db91",
+      "name": "Auto-Reply Greeting",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        864,
+        768
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://cst-evolution-api-406cbd8f-8ccb1fdb.usecloudstation.com/message/sendText/crm_sytem",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "690070226f354734"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"number\": \"{{ $('Webhook').item.json.body.data.key.remoteJid }}\",\n  \"text\": \"مرحباً بك! 👋\\nنظام الذكاء الاصطناعي يبلغك بأنه قد تم تحليل رسالتك، وتم توجيه التذكرة إلى القسم المختص فوراً.\\n\\nسيتم مراجعة طلبك والرد عليك في أقرب وقت. شكراً لثقتك! 🤖\"\n}",
+        "options": {}
+      },
+      "id": "77aa6710-d93d-4d0a-b440-33da6338454c",
+      "name": "Auto-Reply WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        912,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "Customer_Service",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "40c4ed5b-50b5-49ae-b171-7f9db74a8e80"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "customer Service"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "60882424-8d80-4ac3-aacf-065d16a6d21c",
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "G.M",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "General Manager"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b75a284a-a2d0-4ff5-a018-782dba0e44f9",
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "Legal",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Legal"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0f598096-f565-4d0a-983f-4d40e2a1e3ea",
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "Sales",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sales Manager"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ca26ea45-d076-4c7b-9453-be06f8ac8212",
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "H.R",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "H.R"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "Greeting_Or_Incomplete",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "new-greeting-rule-id"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Greeting_Or_Incomplete"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.choices[0].message.content }}",
+                    "rightValue": "Out_Of_Scope",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "out-of-scope-rule-id"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Out_Of_Scope"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        352,
+        480
+      ],
+      "id": "07ec0c48-596f-4881-8af5-bbbc914e3b61",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "sendTo": "pasharmohamed8@gmail.com",
+        "subject": "Anew Customer",
+        "message": "=تنبيه: يوجد طلب جديد للقسم عبر الواتساب 💬  رقم هاتف العميل:  {{ $('Webhook').first()?.json?.body?.data?.key?.remoteJid?.split('@')?.[0] }}  تفاصيل رسالة العميل:  {{ $('Webhook').first()?.json?.body?.data?.message?.conversation || $('Webhook').first()?.json?.body?.data?.message?.extendedTextMessage?.text || $('Groq Whisper (تفريغ الصوت)').first()?.json?.text || $('Groq Vision (قراءة الصورة)').first()?.json?.choices?.[0]?.message?.content || \"لا توجد تفاصيل\" }}  --- (هذه رسالة آلية من نظام الـ CRM الخاص بالشركة)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        688,
+        608
+      ],
+      "id": "169521ad-19aa-44a4-952c-03c54e9c193d",
+      "name": "Send a message",
+      "webhookId": "43456c35-2e52-4227-80e3-3dff68625958",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hdTlSi5FxxHI2pUH",
+          "name": "Gmail account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "1a9c9ccb-f0e8-44ac-9453-e9c53ae56841",
+      "name": "تجهيز النص للتصنيف (صورة)",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        32,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\":\"meta-llama/llama-4-scout-17b-16e-instruct\",\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"You are a helpful assistant. Please extract all the text and details from this image accurately and concisely so I can classify it.\"\n        },\n        {\n          \"type\": \"image_url\",\n          \"image_url\": {\n            \"url\": \"data:{{ $json.body.data.message.mimetype || 'image/jpeg' }};base64,{{ $json.body.data.message.base64 || $json.body.base64 || $json.base64 }}\"\n          }\n        }\n      ]\n    }\n  ],\n  \"temperature\": 0\n}",
+        "options": {}
+      },
+      "id": "c8cafbc7-da0c-498d-a06e-59f0e27e19fd",
+      "name": "Groq Vision (قراءة الصورة)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -192,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "df7e1b41-3b5d-470f-9b64-c09d2d1542fb",
+      "name": "تجهيز النص للتصنيف",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.2,
+      "position": [
+        0,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "model",
+              "value": "whisper-large-v3"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "874b9b6f-62be-411c-b82b-93372837891c",
+      "name": "Groq Whisper (تفريغ الصوت)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -160,
+        448
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputItem = $input.first();\n// البحث عن النص المشفر في الويب هوك\nconst base64Data = inputItem.json.body?.data?.message?.base64 || inputItem.json.data?.message?.base64 || inputItem.json.message?.base64 || inputItem.json.base64;\nconst mimeType = 'audio/ogg';\n\nif (base64Data) {\n  return {\n    json: inputItem.json,\n    binary: {\n      data: {\n        data: base64Data,\n        mimeType: mimeType,\n        fileName: 'audio.ogg'\n      }\n    }\n  };\n}\nreturn inputItem;"
+      },
+      "id": "29764b50-d88b-47bb-a009-df5f751ccd71",
+      "name": "تجهيز الملف الصوتي",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -448,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "=conversation",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6b3752fe-ab4c-4df1-971c-c2556cfebbf9"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "text"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "30ae84e0-54c7-41f4-862a-85c0829c754d",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "extendedTextMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "extended text "
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e2f6a7ef-b4bd-47c9-b0de-0af0f36e2f62",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "audioMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4086a581-23ef-4707-8e51-74a06552aa18",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "imageMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "b3690364-b9ee-47ab-91dd-eafa6f6e18db",
+                    "leftValue": "={{ $json.body.data.messageType }}",
+                    "rightValue": "videoMessage",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "none"
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -752,
+        352
+      ],
+      "id": "e1888b08-c7d9-43ac-87f6-828488b680af",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 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"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"llama-3.3-70b-versatile\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a strict CRM router for 'TechNova', a Smart Electronics Company (Selling Laptops, Phones, Smart Watches, PC Parts, and Tech Accessories). Classify the user's message into exactly ONE of these categories: [H.R, Sales, Legal, G.M, Customer_Service, Greeting_Or_Incomplete, Out_Of_Scope]. Respond with ONLY the category name in English, no other text. Guidelines: H.R (jobs, vacations). Sales (buying laptops, phones, pricing). Legal (contracts). G.M (partnerships). Customer_Service (device complaints, tech support). Greeting_Or_Incomplete (hello, hi). Out_Of_Scope (If the user asks about unrelated products like food, pizza, clothes, or anything not related to electronics and tech).\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": {{ JSON.stringify($json.body?.data?.message?.conversation || $json.body?.data?.message?.extendedTextMessage?.text || $json.text || $json.choices?.[0]?.message?.content || $json.body?.problem_text || \"No message\") }}\n    }\n  ],\n  \"temperature\": 0\n}\n",
+        "options": {}
+      },
+      "id": "5185cdcb-e55d-433f-854a-79f9de19afca",
+      "name": "Google Gemini Classifier",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        256,
+        272
+      ],
+      "notesInFlow": true,
+      "notes": "Add your free Google Gemini API Key in the Query Parameters"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "msg",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -992,
+        432
+      ],
+      "id": "a3445572-40ab-4ade-b73b-2c21094cb876",
+      "name": "Webhook",
+      "webhookId": "cf78d35f-9cd3-4cd9-8c1a-1eedbf8cd8ea"
+    },
+    {
+      "parameters": {
+        "jsCode": "const inputItem = $input.first();\n// البحث عن الفيديو المشفر القادم من الواتساب\nconst base64Data = inputItem.json.body?.data?.message?.base64 || inputItem.json.data?.message?.base64 || inputItem.json.message?.base64 || inputItem.json.base64;\nconst mimeType = 'video/mp4';\n\nif (base64Data) {\n  return {\n    json: inputItem.json,\n    binary: {\n      data: {\n        data: base64Data,\n        mimeType: mimeType,\n        fileName: 'video.mp4'\n      }\n    }\n  };\n}\nreturn inputItem;"
+      },
+      "id": "cdfeb804-c04c-4f0c-b5bf-5d463515fb98",
+      "name": "تجهيز ملف الفيديو",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -560,
+        720
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "pasharmohamed9@gmail.com",
+        "subject": "anew customer ",
+        "message": "=تنبيه: يوجد طلب جديد للقسم عبر الواتساب 💬  رقم هاتف العميل:  {{ $('Webhook').first()?.json?.body?.data?.key?.remoteJid?.split('@')?.[0] }}  تفاصيل رسالة العميل:  {{ $('Webhook').first()?.json?.body?.data?.message?.conversation || $('Webhook').first()?.json?.body?.data?.message?.extendedTextMessage?.text || $('Groq Whisper (تفريغ الصوت)').first()?.json?.text || $('Groq Vision (قراءة الصورة)').first()?.json?.choices?.[0]?.message?.content || \"لا توجد تفاصيل\" }}  --- (هذه رسالة آلية من نظام الـ CRM الخاص بالشركة)",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        198.11423444976072
+      ],
+      "id": "e60f0bf5-a627-4788-a985-61ed7fe62a9f",
+      "name": "Send a message1",
+      "webhookId": "fdd9a48b-6521-47f9-aaae-8df8a96d9eca",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hdTlSi5FxxHI2pUH",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [],
+        [],
+        [],
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Auto-Reply Greeting",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Auto-Reply Out of Scope",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Auto-Reply WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "تجهيز النص للتصنيف (صورة)": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Vision (قراءة الصورة)": {
+      "main": [
+        [
+          {
+            "node": "تجهيز النص للتصنيف (صورة)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "تجهيز النص للتصنيف": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Whisper (تفريغ الصوت)": {
+      "main": [
+        [
+          {
+            "node": "تجهيز النص للتصنيف",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "تجهيز الملف الصوتي": {
+      "main": [
+        [
+          {
+            "node": "Groq Whisper (تفريغ الصوت)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Google Gemini Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Google Gemini Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "تجهيز الملف الصوتي",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Groq Vision (قراءة الصورة)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "تجهيز ملف الفيديو",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Classifier": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "تجهيز ملف الفيديو": {
+      "main": [
+        [
+          {
+            "node": "Groq Whisper (تفريغ الصوت)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message1": {
+      "main": [
+        [
+          {
+            "node": "Auto-Reply WhatsApp",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "58904f80-c8fc-4837-8c27-30ffadcf1da6",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d7f986a139d895345e7303bf6ab13d892ee341ebd969ff058bb594fa66e37fb3"
+  },
+  "id": "8Eu1lUB2WxRc3BGf",
+  "tags": []
+}
